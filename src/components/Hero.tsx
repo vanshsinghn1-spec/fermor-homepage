@@ -1,153 +1,239 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Sparkles,
+  ArrowRight,
+  ShieldCheck,
+  TrendingUp,
+  Cpu,
+  Lock,
+  CheckCircle2,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+
+function formatINR(n: number) {
+  if (n >= 10000000) return `₹${(n / 10000000).toFixed(2)} Cr`;
+  if (n >= 100000) return `₹${(n / 100000).toFixed(2)} L`;
+  return `₹${Math.round(n).toLocaleString("en-IN")}`;
+}
 
 export default function Hero() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const orbRef = useRef<HTMLDivElement>(null);
+  // Mini interactive state right in hero
+  const [quickSip, setQuickSip] = useState<number>(10000);
+  const years = 10;
+  const rate = 12;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email.includes("@")) {
-      setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 3500);
-      setEmail("");
-    }
-  };
-
-  // Parallax subtle orbs on mouse move
-  useEffect(() => {
-    const handleMouse = (e: MouseEvent) => {
-      if (!orbRef.current) return;
-      const x = (e.clientX / window.innerWidth - 0.5) * 24;
-      const y = (e.clientY / window.innerHeight - 0.5) * 24;
-      orbRef.current.style.transform = `translate(${x}px, ${y}px)`;
-    };
-    window.addEventListener("mousemove", handleMouse);
-    return () => window.removeEventListener("mousemove", handleMouse);
-  }, []);
+  // Monthly compounding SIP formula
+  const r = rate / 100 / 12;
+  const n = years * 12;
+  const futureValue =
+    r === 0 ? quickSip * n : quickSip * (((Math.pow(1 + r, n) - 1) / r) * (1 + r));
+  const invested = quickSip * n;
+  const wealthGained = Math.max(0, futureValue - invested);
 
   return (
-    <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden pt-28 pb-16 md:py-32">
-      {/* Background grid */}
-      <div className="hero-grid absolute inset-0 pointer-events-none" />
-
-      {/* Gradient orbs */}
-      <div ref={orbRef} className="absolute inset-0 pointer-events-none transition-transform duration-700 ease-out">
-        <div className="absolute top-[15%] left-[8%] w-[500px] h-[500px] rounded-full bg-mint/[0.05] blur-[130px]" />
-        <div className="absolute bottom-[10%] right-[5%] w-[550px] h-[550px] rounded-full bg-purple/[0.06] blur-[150px]" />
-        <div className="absolute top-[35%] right-[20%] w-[380px] h-[380px] rounded-full bg-blue/[0.05] blur-[110px]" />
+    <section className="relative min-h-[95vh] flex flex-col justify-center items-center overflow-hidden pt-32 pb-20 px-4 md:px-8">
+      {/* Ambient background glows */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-emerald-500/[0.08] blur-[150px] rounded-full" />
+        <div className="absolute top-1/3 left-1/4 w-[500px] h-[350px] bg-teal-500/[0.05] blur-[130px] rounded-full" />
+        <div className="absolute top-1/2 right-1/4 w-[450px] h-[400px] bg-sky-500/[0.04] blur-[140px] rounded-full" />
+        <div className="absolute inset-0 bg-grid-white [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] opacity-70" />
       </div>
 
-      {/* Floating decorative elements */}
-      <div className="absolute top-36 right-[14%] hidden lg:block animate-float">
-        <div className="w-14 h-14 rounded-2xl glass flex items-center justify-center text-2xl shadow-[0_8px_24px_rgba(0,0,0,0.3)]">
-          📈
-        </div>
-      </div>
-      <div className="absolute bottom-40 left-[12%] hidden lg:block animate-float" style={{ animationDelay: "2s" }}>
-        <div className="w-12 h-12 rounded-xl glass flex items-center justify-center text-xl shadow-[0_8px_24px_rgba(0,0,0,0.3)]">
-          ₹
-        </div>
-      </div>
-      <div className="absolute top-[52%] right-[8%] hidden lg:block animate-float" style={{ animationDelay: "4s" }}>
-        <div className="w-11 h-11 rounded-lg glass flex items-center justify-center text-lg shadow-[0_8px_24px_rgba(0,0,0,0.3)]">
-          ⚡
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="relative z-10 max-w-[920px] mx-auto px-6 text-center">
-        {/* Badge */}
-        <div className="animate-fade-up inline-flex items-center gap-2 bg-mint-dim border border-mint/25 rounded-full px-4 py-1.5 mb-7">
-          <span className="w-2 h-2 rounded-full bg-mint animate-pulse-glow" />
-          <span className="text-xs font-semibold text-mint tracking-wide uppercase">
-            Built for Indian Personal Finance
-          </span>
-        </div>
-
-        {/* Headline */}
-        <h1
-          className="animate-fade-up font-[family-name:var(--font-poppins)] text-[clamp(34px,6vw,74px)] font-extrabold leading-[1.06] tracking-[-0.035em] mb-5 text-text-primary"
-          style={{ animationDelay: "0.1s" }}
+      <div className="max-w-5xl mx-auto text-center flex flex-col items-center">
+        {/* Floating pill badge */}
+        <motion.div
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="mb-6"
         >
-          Build your wealth
-          <br />
-          with <span className="gradient-text">uncompromised clarity</span>.
-        </h1>
-
-        {/* Subtitle */}
-        <p
-          className="animate-fade-up text-text-secondary text-base md:text-xl leading-relaxed max-w-[620px] mx-auto mb-9"
-          style={{ animationDelay: "0.2s" }}
-        >
-          Invest, calculate and plan — without spam or sales pitches. Free transparent tools, accurate Indian formulas, and 100% private in-browser math.
-        </p>
-
-        {/* Email form + CTA */}
-        <div className="animate-fade-up max-w-[540px] mx-auto" style={{ animationDelay: "0.3s" }}>
-          <form onSubmit={handleSubmit}>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-1.5 glass-strong rounded-2xl sm:rounded-full p-2 sm:p-1.5 shadow-[0_12px_40px_rgba(0,0,0,0.4)]">
-              <input
-                type="email"
-                inputMode="email"
-                autoComplete="email"
-                aria-label="Email address"
-                placeholder="Enter your email for early features..."
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 min-w-0 bg-transparent text-text-primary text-[15px] placeholder:text-text-tertiary px-4 py-3 outline-none"
-              />
-              <button
-                type="submit"
-                className="btn-glow shrink-0 px-6 py-3 sm:py-2.5 text-sm whitespace-nowrap font-bold"
-              >
-                {submitted ? "✓ You're on the list!" : "Join Early Access"}
-              </button>
-            </div>
-          </form>
-
-          {/* Quick jump anchor buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-4 mt-4 text-xs text-text-tertiary">
-            <span>Free forever · No login required</span>
-            <span className="hidden sm:inline">·</span>
-            <a
-              href="#calculator"
-              className="text-mint hover:underline font-semibold flex items-center gap-1"
-            >
-              Try Live Calculator
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M12 5v14M5 12l7 7 7-7" />
-              </svg>
-            </a>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-950/30 backdrop-blur-md shadow-[0_0_20px_rgba(52,211,153,0.15)]">
+            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-xs font-semibold text-emerald-300 tracking-wide">
+              Fermor 2.0 • Clear, Honest Indian Personal Finance
+            </span>
+            <span className="text-zinc-600">|</span>
+            <span className="text-xs text-zinc-400 font-medium hidden sm:inline">
+              100% In-Browser Privacy
+            </span>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Stats strip */}
-        <div
-          className="animate-fade-up mt-14 grid grid-cols-3 gap-4 md:gap-8 max-w-[500px] mx-auto pt-6 border-t border-border/50"
-          style={{ animationDelay: "0.45s" }}
+        {/* Hero Title */}
+        <motion.h1
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+          className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight font-[family-name:var(--font-poppins)] text-zinc-100 max-w-4xl leading-[1.08] mb-6"
         >
-          {[
-            { value: "20+", label: "Calculators" },
-            { value: "₹0", label: "No Hidden Fees" },
-            { value: "100%", label: "Client Privacy" },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="text-2xl md:text-3xl font-extrabold text-text-primary font-[family-name:var(--font-poppins)] tracking-tight">
-                {stat.value}
+          Master your money with{" "}
+          <span className="text-gradient-emerald">transparent math</span>.
+        </motion.h1>
+
+        {/* Hero Subtitle */}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          className="text-base sm:text-xl text-zinc-400 max-w-2xl leading-relaxed mb-10"
+        >
+          No login walls. No cold calls. No disguised commissions. Free calculators, tax models, and portfolio intelligence built specifically for India.
+        </motion.p>
+
+        {/* Action CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+          className="flex flex-col sm:flex-row items-center gap-3.5 mb-14 w-full sm:w-auto"
+        >
+          <Button variant="glow" size="lg" className="w-full sm:w-auto gap-2" asChild>
+            <a href="#calculator">
+              <span>Launch Calculator Suite</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </Button>
+          <Button variant="outline" size="lg" className="w-full sm:w-auto gap-2" asChild>
+            <a href="#principles">
+              <ShieldCheck className="w-4 h-4 text-emerald-400" />
+              <span>Explore Our Principles</span>
+            </a>
+          </Button>
+        </motion.div>
+
+        {/* Interactive Live Compounding Preview Card */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95, y: 25 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+          className="w-full max-w-3xl"
+        >
+          <div className="relative rounded-3xl border border-zinc-800/90 bg-zinc-950/80 p-6 md:p-8 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.6)] specular-border">
+            {/* Top Bar */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-zinc-800/80 gap-3">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold">
+                  ₹
+                </div>
+                <div className="text-left">
+                  <h3 className="text-sm font-semibold text-zinc-100 flex items-center gap-2">
+                    Instant SIP Simulation
+                    <Badge variant="mint" className="text-[10px] px-1.5 py-0 h-4 font-normal">
+                      Live
+                    </Badge>
+                  </h3>
+                  <p className="text-xs text-zinc-500">10-Year Horizon @ 12% p.a. Compounding</p>
+                </div>
               </div>
-              <div className="text-[11px] md:text-xs text-text-tertiary mt-1 uppercase tracking-wider font-medium">
-                {stat.label}
+              <div className="flex items-center gap-2 self-start sm:self-auto">
+                <span className="text-xs text-zinc-400">Monthly SIP:</span>
+                <span className="text-xs font-mono font-bold text-emerald-400 bg-zinc-900 border border-zinc-800 px-2.5 py-1 rounded-md">
+                  ₹{quickSip.toLocaleString("en-IN")}/mo
+                </span>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
 
-      {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-ground to-transparent pointer-events-none" />
+            {/* Slider */}
+            <div className="pt-6 pb-5">
+              <div className="flex justify-between items-center text-xs text-zinc-400 mb-2 font-medium">
+                <span>Slide to simulate investment size:</span>
+                <span className="text-emerald-400 font-bold font-mono">
+                  {formatINR(quickSip)} per month
+                </span>
+              </div>
+              <input
+                type="range"
+                min="1000"
+                max="100000"
+                step="1000"
+                value={quickSip}
+                onChange={(e) => setQuickSip(Number(e.target.value))}
+                className="w-full"
+                aria-label="Quick SIP Investment Slider"
+              />
+              <div className="flex justify-between text-[11px] text-zinc-500 mt-1.5 font-mono">
+                <span>₹1,000/mo</span>
+                <span>₹50,000/mo</span>
+                <span>₹1,00,000/mo</span>
+              </div>
+            </div>
+
+            {/* Live Projected Metrics */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+              <div className="rounded-xl bg-zinc-900/60 border border-zinc-800/80 p-3.5 text-left">
+                <div className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">
+                  You Invest
+                </div>
+                <div className="text-lg font-bold text-zinc-200 font-mono mt-1">
+                  {formatINR(invested)}
+                </div>
+                <div className="text-[11px] text-zinc-500 mt-0.5">Over 10 years</div>
+              </div>
+
+              <div className="rounded-xl bg-zinc-900/60 border border-zinc-800/80 p-3.5 text-left">
+                <div className="text-[11px] font-medium text-zinc-500 uppercase tracking-wider">
+                  Estimated Growth
+                </div>
+                <div className="text-lg font-bold text-emerald-400 font-mono mt-1">
+                  +{formatINR(wealthGained)}
+                </div>
+                <div className="text-[11px] text-emerald-500/70 mt-0.5">Compound interest</div>
+              </div>
+
+              <div className="rounded-xl bg-gradient-to-br from-emerald-500/10 to-teal-500/5 border border-emerald-500/30 p-3.5 text-left">
+                <div className="text-[11px] font-medium text-emerald-300 uppercase tracking-wider">
+                  Total Future Value
+                </div>
+                <div className="text-xl font-extrabold text-emerald-400 font-mono mt-1">
+                  {formatINR(futureValue)}
+                </div>
+                <div className="text-[11px] text-zinc-400 mt-0.5">Purchasing power estimate</div>
+              </div>
+            </div>
+
+            {/* Bottom mini guarantee */}
+            <div className="flex items-center justify-between pt-5 mt-5 border-t border-zinc-800/60 text-xs text-zinc-500">
+              <span className="flex items-center gap-1.5">
+                <Lock className="w-3.5 h-3.5 text-emerald-400" />
+                Runs 100% on device. Zero data sent to servers.
+              </span>
+              <a
+                href="#calculator"
+                className="text-emerald-400 hover:text-emerald-300 font-medium flex items-center gap-1"
+              >
+                Open Full Engine →
+              </a>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Ecosystem Trust Strip */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-14 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-zinc-400 border-t border-zinc-800/70 pt-8"
+        >
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <span>RBI Standard Quarterly Compounding</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <span>CBDT FY 2025-26 Tax Slabs</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <span>Strict Zero-Promotion Policy</span>
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 }

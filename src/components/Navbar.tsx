@@ -1,148 +1,168 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Sparkles, Menu, X, ArrowUpRight, ShieldCheck } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
-const NAV_LINKS = [
+const NAV_ITEMS = [
   { label: "Products", href: "#features" },
   { label: "Calculators", href: "#calculator" },
-  { label: "About", href: "#principles" },
-  { label: "Blog", href: "#blog" },
+  { label: "Architecture", href: "#principles" },
+  { label: "Articles", href: "#blog" },
   { label: "FAQ", href: "#faq" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
     };
-  }, [mobileOpen]);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "py-2 px-4 md:px-6" : "py-3.5 px-4 md:px-8"
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled ? "py-3 px-4 md:px-6" : "py-5 px-4 md:px-8"
         }`}
       >
-        <div
-          className={`max-w-[1200px] mx-auto flex items-center justify-between rounded-full transition-all duration-500 ${
-            scrolled
-              ? "glass-strong px-5 py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
-              : "px-4 py-2"
-          }`}
-        >
+        <div className="max-w-6xl mx-auto flex items-center justify-between">
           {/* Brand */}
-          <a href="/" className="flex items-center gap-2.5 shrink-0" aria-label="Fermor Home">
-            <div className="w-8 h-8 rounded-lg bg-mint flex items-center justify-center shadow-[0_0_12px_rgba(117,251,144,0.3)]">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-                  stroke="#0A0B0D"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+          <a
+            href="/"
+            className="flex items-center gap-3 group focus:outline-none"
+            aria-label="Fermor Home"
+          >
+            <div className="relative w-9 h-9 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center overflow-hidden shadow-[0_0_15px_rgba(52,211,153,0.15)] group-hover:border-emerald-500/40 transition-colors">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-teal-500/0" />
+              <div className="w-4 h-4 rounded-full bg-emerald-400 shadow-[0_0_12px_#34d399]" />
             </div>
-            <span className="text-[19px] font-extrabold tracking-tight text-text-primary font-[family-name:var(--font-poppins)]">
-              Fermor
-            </span>
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1.5">
+                <span className="text-lg font-bold tracking-tight text-zinc-100 font-[family-name:var(--font-poppins)]">
+                  Fermor
+                </span>
+                <Badge variant="mint" className="text-[10px] px-1.5 py-0 h-4 uppercase">
+                  Beta
+                </Badge>
+              </div>
+            </div>
           </a>
 
-          {/* Center links – desktop */}
-          <div className="hidden md:flex items-center gap-1">
-            {NAV_LINKS.map((link) => (
-              <a key={link.label} href={link.href} className="nav-link">
-                {link.label}
+          {/* Desktop Nav Items */}
+          <nav className="hidden md:flex items-center gap-1 glass-pill px-3 py-1.5 rounded-full shadow-lg">
+            {NAV_ITEMS.map((item, idx) => (
+              <a
+                key={item.label}
+                href={item.href}
+                onMouseEnter={() => setHoveredIndex(idx)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                className="relative px-3.5 py-1.5 text-xs font-medium text-zinc-300 hover:text-white transition-colors"
+              >
+                {hoveredIndex === idx && (
+                  <motion.div
+                    layoutId="navbar-hover"
+                    className="absolute inset-0 rounded-full bg-zinc-800/80 -z-10"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.35 }}
+                  />
+                )}
+                {item.label}
               </a>
             ))}
-          </div>
+          </nav>
 
-          {/* Right side – desktop */}
+          {/* Desktop Right Actions */}
           <div className="hidden md:flex items-center gap-3">
-            <a href="#cta" className="btn-outline px-4 py-1.5 text-xs font-semibold">
-              Sign In
-            </a>
-            <a href="#cta" className="btn-glow px-4 py-1.5 text-xs">
-              Get Started Free
-            </a>
+            <div className="flex items-center gap-1.5 text-[11px] text-zinc-400 bg-zinc-900/60 border border-zinc-800 px-2.5 py-1 rounded-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Client-Side Math</span>
+            </div>
+            <Button variant="outline" size="sm" asChild>
+              <a href="#cta">Sign In</a>
+            </Button>
+            <Button variant="default" size="sm" asChild>
+              <a href="#calculator" className="flex items-center gap-1">
+                <span>Try Engine</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            </Button>
           </div>
 
-          {/* Mobile hamburger */}
+          {/* Mobile Menu Toggle */}
           <button
-            className="md:hidden flex flex-col gap-1.5 p-2 focus:outline-none"
             onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={mobileOpen}
+            className="md:hidden p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white focus:outline-none"
+            aria-label="Toggle navigation menu"
           >
-            <span
-              className={`block w-5 h-0.5 bg-text-primary rounded transition-all duration-300 ${
-                mobileOpen ? "rotate-45 translate-y-2" : ""
-              }`}
-            />
-            <span
-              className={`block w-5 h-0.5 bg-text-primary rounded transition-all duration-300 ${
-                mobileOpen ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`block w-5 h-0.5 bg-text-primary rounded transition-all duration-300 ${
-                mobileOpen ? "-rotate-45 -translate-y-2" : ""
-              }`}
-            />
+            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
-      </nav>
+      </header>
 
-      {/* Mobile sheet */}
-      <div
-        className={`fixed inset-0 z-40 bg-ground/95 backdrop-blur-xl transition-all duration-400 md:hidden flex flex-col justify-center items-center ${
-          mobileOpen ? "opacity-100 visible" : "opacity-0 invisible"
-        }`}
-      >
-        <div className="flex flex-col items-center justify-center gap-6 text-center">
-          {NAV_LINKS.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="text-2xl font-semibold text-text-primary hover:text-mint transition-colors"
-              onClick={() => setMobileOpen(false)}
-            >
-              {link.label}
-            </a>
-          ))}
-          <div className="flex flex-col gap-3 mt-6 w-52">
-            <a
-              href="#cta"
-              className="btn-glow text-center px-6 py-3 text-sm"
-              onClick={() => setMobileOpen(false)}
-            >
-              Get Started Free
-            </a>
-            <a
-              href="#cta"
-              className="btn-outline text-center px-6 py-3 text-sm font-semibold"
-              onClick={() => setMobileOpen(false)}
-            >
-              Sign In
-            </a>
-          </div>
-        </div>
-      </div>
+      {/* Mobile Drawer */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-40 bg-zinc-950/95 backdrop-blur-2xl md:hidden pt-28 px-6 flex flex-col justify-between pb-10"
+          >
+            <div className="flex flex-col gap-4">
+              <p className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-2">
+                Navigation
+              </p>
+              {NAV_ITEMS.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="text-2xl font-bold text-zinc-200 hover:text-emerald-400 transition-colors py-1 flex items-center justify-between"
+                >
+                  <span>{item.label}</span>
+                  <ArrowUpRight className="w-5 h-5 text-zinc-600" />
+                </a>
+              ))}
+            </div>
+
+            <div className="flex flex-col gap-3 pt-6 border-t border-zinc-900">
+              <div className="flex items-center gap-2 text-xs text-zinc-400 mb-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                <span>Zero login required for calculators</span>
+              </div>
+              <Button
+                variant="default"
+                size="lg"
+                className="w-full font-bold"
+                asChild
+              >
+                <a href="#calculator" onClick={() => setMobileOpen(false)}>
+                  Open Live Calculators
+                </a>
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="w-full"
+                asChild
+              >
+                <a href="#cta" onClick={() => setMobileOpen(false)}>
+                  Join Waitlist
+                </a>
+              </Button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

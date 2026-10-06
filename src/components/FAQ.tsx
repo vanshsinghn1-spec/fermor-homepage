@@ -1,125 +1,110 @@
 "use client";
 
-import { useState } from "react";
+import { motion } from "framer-motion";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { HelpCircle, Mail, ShieldCheck } from "lucide-react";
 
 const faqs = [
   {
-    question: "Is Fermor completely free to use?",
+    value: "item-1",
+    question: "Is Fermor completely free to use? Are there hidden fees or paywalls?",
     answer:
-      "Yes, 100% free. All our financial calculators, scenario planning engines, and educational resources have no paywalls, subscription tiers, or locked features. We believe fundamental financial clarity should be accessible to every Indian.",
+      "Yes, 100% free forever. All our calculators (SIP, EMI, FD, Tax, PPF, NPS), compounding projections, and educational materials have zero paywalls, subscription models, or locked premium tiers. Our mission is to make mathematical financial clarity available to every Indian.",
   },
   {
-    question: "Are my salary, loan, and investment numbers stored on your servers?",
+    value: "item-2",
+    question: "Do you store my private salary, loan amounts, or net worth on your servers?",
     answer:
-      "No. All calculator math runs entirely inside your browser on your device (client-side execution). Your financial figures are never saved, tracked, or sent to any remote database.",
+      "No. All mathematical operations run entirely client-side inside your browser's local sandbox memory. Your confidential numbers are never dispatched, logged, or saved to any remote database. You can even run our calculators with your internet connection disabled.",
   },
   {
-    question: "How do Fermor's formulas compare to bank calculators?",
+    value: "item-3",
+    question: "How do Fermor's calculation formulas compare against Indian retail banks?",
     answer:
-      "Our tools follow official Indian regulatory methodologies: Fixed Deposits use quarterly compounding per RBI standards, EMIs use the standard reducing balance formula used by top Indian retail banks, and SIPs calculate monthly compounding with annuity-due precision.",
+      "Our formulas strictly adhere to Indian regulatory frameworks: Fixed Deposits follow official RBI quarterly compounding protocols, EMIs use the standard reducing balance method mandated for commercial lenders, and our SIP projections use monthly annuity-due calculations benchmarked against long-term historical Nifty 50 index trends.",
   },
   {
-    question: "Do you push financial products or earn covert commissions?",
+    value: "item-4",
+    question: "Do you push financial products or earn covert affiliate commissions?",
     answer:
-      "No. Most finance portals in India operate as lead-generation engines disguised as advice. Fermor was founded on open methodology and unbiased math. We do not sell insurance, push credit cards, or skew answers for referral fees.",
+      "No. Traditional aggregator websites operate as lead-generation call centers that sell your contact details to insurance agents. Fermor was founded on open methodology and complete transparency. We do not sell insurance, push high-interest personal loans, or skew calculator outcomes for sponsorship fees.",
   },
   {
-    question: "Are tax tools updated for FY 2025-26 (AY 2026-27)?",
+    value: "item-5",
+    question: "Are your tax tools updated for the latest Union Budget provisions?",
     answer:
-      "Yes. Our tax engines incorporate the latest Union Budget provisions — including the New Tax Regime revised rebate under Section 87A, updated slab thresholds, and the standard deduction.",
+      "Yes. Our tax calculators are updated for the New Tax Regime revisions — including the increased Standard Deduction (₹75,000 for salaried employees), revised tax slab thresholds, and marginal relief calculations under Section 87A.",
+  },
+  {
+    value: "item-6",
+    question: "Why do you provide an 'Adjust for 6% Inflation' toggle?",
+    answer:
+      "Most Indian calculators deceive investors by showcasing a dazzling nominal number (e.g., 'Your SIP will become ₹1 Crore in 20 years!') without accounting for eroding purchasing power. At an average 6% CPI inflation, ₹1 Crore in 20 years has the real purchasing equivalent of ~₹31.1 Lakhs today. Fermor shows you the unvarnished reality so you can plan adequately.",
   },
 ];
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
-  const toggle = (idx: number) => {
-    setOpenIndex(openIndex === idx ? null : idx);
-  };
-
   return (
-    <section id="faq" className="relative py-28 md:py-36 px-6">
-      {/* Background soft glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 right-1/4 w-[400px] h-[400px] rounded-full bg-blue/[0.03] blur-[140px]" />
+    <section id="faq" className="relative py-28 md:py-36 px-4 md:px-8">
+      {/* Background ambient lighting */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
+        <div className="absolute top-1/2 right-1/3 w-[500px] h-[350px] bg-sky-500/[0.03] blur-[150px] rounded-full" />
       </div>
 
-      <div className="relative max-w-[800px] mx-auto">
+      <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 bg-surface-2 border border-border rounded-full px-4 py-1.5 mb-6">
-            <span className="text-xs font-semibold text-text-secondary tracking-wider uppercase">
-              Common Questions
-            </span>
-          </div>
-          <h2 className="font-[family-name:var(--font-poppins)] text-[clamp(28px,4vw,48px)] font-bold tracking-[-0.03em] leading-tight mb-4">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <Badge variant="mint" className="mb-4">
+            Common Inquiries
+          </Badge>
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-[family-name:var(--font-poppins)] text-zinc-100 mb-4">
             Frequently Asked{" "}
-            <span className="text-text-secondary">Questions</span>
+            <span className="text-zinc-500">Questions.</span>
           </h2>
-          <p className="text-text-secondary text-base md:text-lg max-w-[480px] mx-auto">
-            Everything you need to know about our tools, data privacy, and methodology.
+          <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
+            Everything you need to know about our privacy architecture, calculation accuracy, and regulatory compliance.
           </p>
         </div>
 
-        {/* Accordion list */}
-        <div className="space-y-3.5">
-          {faqs.map((faq, idx) => {
-            const isOpen = openIndex === idx;
-            return (
-              <div
-                key={faq.question}
-                className="rounded-2xl border border-border bg-surface transition-colors duration-200 overflow-hidden"
-              >
-                <button
-                  type="button"
-                  onClick={() => toggle(idx)}
-                  className="w-full flex items-center justify-between p-5 md:p-6 text-left cursor-pointer transition-colors hover:bg-white/[0.02]"
-                  aria-expanded={isOpen}
-                >
-                  <span className="font-[family-name:var(--font-poppins)] text-[15px] md:text-base font-semibold text-text-primary pr-4">
-                    {faq.question}
-                  </span>
-                  <div
-                    className={`w-7 h-7 rounded-full bg-surface-2 border border-border flex items-center justify-center shrink-0 transition-transform duration-300 ${
-                      isOpen ? "rotate-180 text-mint" : "text-text-secondary"
-                    }`}
-                  >
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M6 9l6 6 6-6" />
-                    </svg>
-                  </div>
-                </button>
+        {/* Shadcn Radix Accordion */}
+        <Accordion type="single" collapsible defaultValue="item-1" className="w-full">
+          {faqs.map((faq) => (
+            <AccordionItem key={faq.value} value={faq.value}>
+              <AccordionTrigger className="text-sm sm:text-base font-semibold">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
 
-                {isOpen && (
-                  <div className="px-5 pb-6 md:px-6 md:pb-6 text-sm text-text-secondary leading-relaxed border-t border-border/50 pt-3 animate-fade-in">
-                    {faq.answer}
-                  </div>
-                )}
+        {/* Support contact card */}
+        <div className="mt-12 p-6 rounded-2xl border border-zinc-800/80 bg-zinc-950/60 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-emerald-400">
+              <Mail className="w-5 h-5" />
+            </div>
+            <div>
+              <div className="text-sm font-semibold text-zinc-200">
+                Have a question or custom calculation formula?
               </div>
-            );
-          })}
-        </div>
-
-        {/* Help footer */}
-        <div className="mt-10 text-center">
-          <p className="text-xs text-text-tertiary">
-            Have a custom calculation or question?{" "}
-            <a
-              href="mailto:fermor.in.contact@gmail.com"
-              className="text-mint hover:underline font-medium"
-            >
-              Reach out to our team
-            </a>
-          </p>
+              <div className="text-xs text-zinc-500">
+                Our engineering team responds to all methodology inquiries.
+              </div>
+            </div>
+          </div>
+          <Button variant="outline" size="sm" asChild>
+            <a href="mailto:fermor.in.contact@gmail.com">Contact Us</a>
+          </Button>
         </div>
       </div>
     </section>

@@ -1,71 +1,76 @@
+"use client";
+
+import { ShieldCheck, Heart } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+
 export default function Footer() {
   const footerLinks = {
     Calculators: [
-      { label: "SIP Calculator", href: "#calculator" },
-      { label: "Loan EMI Calculator", href: "#calculator" },
-      { label: "Fixed Deposit (FD)", href: "#calculator" },
-      { label: "Lumpsum Mutual Fund", href: "#calculator" },
-      { label: "Income Tax (New vs Old)", href: "#calculator" },
-      { label: "PPF & NPS Estimator", href: "#calculator" },
+      { label: "SIP Wealth Accumulator", href: "#calculator" },
+      { label: "Step-Up SIP Planner", href: "#calculator" },
+      { label: "Loan EMI & Reducing Balance", href: "#calculator" },
+      { label: "Fixed Deposit (RBI Norms)", href: "#calculator" },
+      { label: "New vs. Old Tax Regime", href: "#calculator" },
+      { label: "Public Provident Fund (PPF)", href: "#calculator" },
     ],
     Products: [
-      { label: "Market Intelligence", href: "#features" },
-      { label: "Portfolio Tracking", href: "#features" },
-      { label: "Smart Planning", href: "#features" },
-      { label: "Ask Anything AI", href: "#features" },
+      { label: "Portfolio Radar", href: "#features" },
+      { label: "Macro Market Pulse", href: "#features" },
+      { label: "Ask Fermor Copilot", href: "#features" },
+      { label: "Retirement Horizons", href: "#features" },
       { label: "Financial Literacy for Kids", href: "#features" },
     ],
     Resources: [
-      { label: "Blog & Guides", href: "#blog" },
-      { label: "ITR Deadline 2026", href: "#blog" },
-      { label: "RBI Product Guidelines", href: "#blog" },
-      { label: "Stock P/E Valuation", href: "#blog" },
+      { label: "Research Notes & Blog", href: "#blog" },
+      { label: "ITR Filing FY 2025-26", href: "#blog" },
+      { label: "RBI Mis-Selling Rights", href: "#blog" },
+      { label: "Equity Multiples Guide", href: "#blog" },
     ],
     Company: [
-      { label: "Our Principles", href: "#principles" },
+      { label: "Architectural Principles", href: "#principles" },
       { label: "Frequently Asked Questions", href: "#faq" },
-      { label: "Contact Us", href: "mailto:fermor.in.contact@gmail.com" },
+      { label: "Contact Engineering", href: "mailto:fermor.in.contact@gmail.com" },
       { label: "Methodology & Disclaimers", href: "#principles" },
     ],
   };
 
   return (
-    <footer className="relative border-t border-border bg-surface">
-      <div className="max-w-[1200px] mx-auto px-6 pt-16 pb-8">
-        {/* Links grid */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-10 md:gap-8 mb-14">
-          {/* Brand */}
+    <footer className="relative border-t border-zinc-900 bg-zinc-950 text-zinc-400">
+      <div className="max-w-6xl mx-auto px-4 md:px-8 pt-16 pb-12">
+        {/* Main Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-10 md:gap-8 mb-16">
+          {/* Brand Column */}
           <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-mint flex items-center justify-center shadow-[0_0_12px_rgba(117,251,144,0.3)]">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
-                    stroke="#0A0B0D"
-                    strokeWidth="2.2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-8 h-8 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center shadow-[0_0_12px_rgba(52,211,153,0.2)]">
+                <div className="w-3.5 h-3.5 rounded-full bg-emerald-400" />
               </div>
-              <span className="text-lg font-extrabold tracking-tight text-text-primary font-[family-name:var(--font-poppins)]">
+              <span className="text-lg font-bold tracking-tight text-zinc-100 font-[family-name:var(--font-poppins)]">
                 Fermor
               </span>
             </div>
-            <p className="text-sm text-text-tertiary leading-relaxed max-w-[220px]">
-              Clarity for every financial decision. Free tools, clear math, built for India.
+            <p className="text-xs text-zinc-400 leading-relaxed mb-4 max-w-xs">
+              Smart financial decisions for India. Free tools, transparent math, and zero spam.
             </p>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-[11px] text-zinc-400">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span>In-browser local calculations</span>
+            </div>
           </div>
 
-          {/* Link columns */}
+          {/* Navigation Columns */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h4 className="text-[11px] font-bold text-text-tertiary tracking-[0.12em] uppercase mb-4">
+              <h4 className="text-[11px] font-semibold text-zinc-300 uppercase tracking-wider mb-4">
                 {category}
               </h4>
               <div className="flex flex-col gap-2.5">
                 {links.map((link) => (
-                  <a key={link.label} href={link.href} className="footer-link">
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="text-xs text-zinc-400 hover:text-emerald-400 transition-colors"
+                  >
                     {link.label}
                   </a>
                 ))}
@@ -74,14 +79,14 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-border pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <span className="text-xs text-text-tertiary">
-            © {new Date().getFullYear()} Fermor Technologies Pvt. Ltd. All rights reserved.
-          </span>
-          <span className="text-xs text-text-tertiary">
-            Results are for estimation and educational purposes. Not SEBI-registered investment advice.
-          </span>
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-zinc-900/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+          <div>
+            © {new Date().getFullYear()} Fermor Technologies Pvt. Ltd. Engineered for Indian retail investors.
+          </div>
+          <div className="text-center md:text-right">
+            Calculations are for educational and planning estimates. Not SEBI-registered investment advice.
+          </div>
         </div>
       </div>
     </footer>

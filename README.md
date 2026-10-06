@@ -1,68 +1,67 @@
 # Fermor — Smart Financial Decisions for India
 
 > **Frontend Developer Assignment Submission**  
-> A high-performance, product-driven homepage built for **Fermor**, designed to communicate financial clarity, privacy, and transparent mathematics for Indian retail investors.
+> A high-performance, product-driven homepage built for **Fermor**, engineered with **Next.js (App Router)**, **TypeScript**, **Framer Motion**, and **shadcn/ui** design system components. Communicates financial clarity, privacy, and transparent mathematics for Indian retail investors.
 
 ---
 
-## 🌟 Live Demo & Deployment
+## 🌟 Tech Stack & Design Architecture
 
-- **Live URL**: [Deployable directly on Vercel / Netlify](https://vercel.com)
-- **Framework**: Next.js (App Router) + TypeScript + Tailwind CSS
-- **Performance**: Zero external chart bundle dependencies; 100% SVG-rendered mathematical curves.
-
----
-
-## 💡 Product Thinking & Key Decisions
-
-### 1. Understanding Fermor: Who is it for?
-Most financial tools in India (insurance portals, loan aggregators, investment apps) operate as aggressive lead-generation engines disguised as advice. They hide the math, trap users behind compulsory phone-number login walls, and push high-commission products.
-
-**Fermor's core differentiation:**
-- **"See the math. Not just the answer."** Every calculation reveals the methodology, variables, and formula.
-- **Client-Side Privacy**: All mathematical computations run entirely inside the user's browser. No financial data or salary numbers are transmitted to remote servers.
-- **India-First Architecture**: Native support for Indian numerical denominations (₹, Lakhs, Crores), RBI-mandated quarterly compounding for term deposits, and reducing balance EMI formulas.
+- **Framework**: Next.js 16 (App Router) + React 19 + TypeScript
+- **Design System**: [shadcn/ui](https://ui.shadcn.com/) primitives built with Radix UI (`@radix-ui/react-accordion`, `@radix-ui/react-slider`, `@radix-ui/react-tabs`, `@radix-ui/react-slot`)
+- **Animation Engine**: [Framer Motion](https://www.framer.com/motion/) (spring physics, layoutId indicators, exit/entry transitions, interactive gestures)
+- **Styling**: Tailwind CSS v4 + Deep Zinc palette (`#09090b`), emerald accents (`#34d399`), and glassmorphism
+- **Iconography**: [Lucide React](https://lucide.dev/)
+- **Zero Heavyweight Chart Bloat**: Custom native SVG curve calculation engine delivering sub-second loads and 60fps responsiveness.
 
 ---
 
-### 2. Architecture & Design System
+## 💡 Product Thinking & Design Decisions
 
-| Element | Decision & Rationale |
+### 1. The Core Problem with Indian Personal Finance
+Most financial aggregator apps in India (loan portals, insurance brokers, mutual fund platforms) operate as aggressive lead-generation engines disguised as advice:
+- Mandatory phone number OTP barriers before showing basic calculation numbers.
+- Unsolicited cold calls from telemarketers within minutes.
+- Opaque black-box calculations with no visible formulas.
+- Products ranked based on behind-the-scenes commissions.
+
+**Fermor's Counterweight Architecture:**
+- **"See the math. Not just the answer."** Every calculation reveals the methodology, variables, compounding frequency, and formula.
+- **Client-Side In-Browser Privacy**: 100% of arithmetic runs locally on the user's device memory. Zero financial telemetry or server logging.
+- **India-First Regulatory Standards**: Native support for Indian numerical denominations (₹, Lakhs, Crores), RBI-mandated quarterly compounding for term deposits, standard reducing balance EMI formulas, and the latest Union Budget tax slabs.
+
+---
+
+### 2. Design System Upgrades (Framer Motion & shadcn/ui)
+
+| Component / Layer | Implementation Details |
 | :--- | :--- |
-| **Color Palette** | Deep obsidian ground (`#0A0B0D`) paired with high-contrast electric mint (`#75FB90`), subtle purples, and blues. Evokes precision, modern fintech authority, and calm readability. |
-| **Typography** | `Poppins` for punchy, modern geometric headlines and `Inter` for crisp tabular numbers and micro-copy. |
-| **Zero-Bundle SVG Charts** | Instead of heavy charting libraries (like Chart.js or Recharts that add 150KB+ to bundle size), built a custom SVG engine that dynamically computes Bezier and quadratic growth curves directly from mathematical models. |
-| **Responsive Philosophy** | Mobile-first layout with touch-friendly sliders, stacked summary cards, and responsive navigation overlays. |
+| **Pill Navigation** (`Navbar.tsx`) | Floating glass pill with scroll-state blur detection, `layoutId="navbar-hover"` animated indicator, live status pill, and mobile drawer. |
+| **Hero & Instant Simulator** (`Hero.tsx`) | High-contrast typography with ambient radial lighting, early access funnel, and a live in-hero compounding simulator. |
+| **Interactive Bento Grid** (`Features.tsx`) | Modern 4-card Bento layout showcasing Portfolio Risk Radar, Step-Up SIP Multiplier, New vs. Old Tax Engine, and Conversational Financial Copilot. |
+| **Flagship Calculator Engine** (`CalculatorDemo.tsx`) | Framer Motion sliding pill tab indicator (`layoutId="active-calc-pill"`), 4 calculation modes (SIP, Lumpsum, Loan EMI, FD), inflation reality check (6% CPI), and schedule amortization table. |
+| **Principles & Contrast Matrix** (`Principles.tsx`) | Direct side-by-side comparison between traditional lead-generation portals vs. the Fermor open standard. |
+| **Interactive Accordion** (`FAQ.tsx`) | Built with Radix Accordion primitive answering critical user inquiries on data safety, RBI standards, and budget changes. |
+| **Conversion Funnel** (`CTA.tsx`) | Specular-border terminal card with ambient backlight and instant waitlist submission. |
 
 ---
 
 ## 🛠️ Interactive Features Built
 
 ### 1. Multi-Mode Financial Math Engine (`CalculatorDemo.tsx`)
-A live calculator supporting four distinct financial modes:
-- **SIP Planner**: Monthly investment, expected annual return, and time horizon with dynamic wealth compounding curve.
-- **Lumpsum**: One-time mutual fund / equity investment forecast.
-- **Loan EMI**: Home, car, and personal loan reducing-balance installment estimator with total interest vs. principal split.
-- **Fixed Deposit (FD)**: Term deposit maturity forecast adhering to RBI quarterly compounding standards.
-- **Inflation Adjustment Toggle (6% p.a.)**: Shows real purchasing power alongside nominal future value.
+- **SIP Wealth Accumulator**: Monthly installment, annual return rate, and tenure with dynamic compounding curve.
+- **Lumpsum Planner**: One-time mutual fund / equity growth calculation.
+- **Loan EMI Amortizer**: Home, car, and personal loan reducing-balance installment calculator with principal vs. interest breakdown.
+- **Fixed Deposit (FD)**: Compounded quarterly per official RBI standards.
+- **Inflation Reality Check (6% p.a.)**: Shows real purchasing power alongside nominal future value.
 - **Compounding Schedule View**: Toggles between visual growth curves and a year-by-year amortization/growth table.
-- **"Show the Math" Formula Drawer**: Inspects the exact formula ($FV = P \times \dots$) and variable definitions.
+- **"Inspect Mathematical Methodology" Drawer**: Expands actual mathematical formulas ($FV$, $EMI$, $A$) and regulatory assumptions.
 
-### 2. Product Suite Showcase (`Features.tsx`)
-Showcases Fermor's broader product vision:
-- Market Intelligence (stocks, mutual funds, ETFs)
-- Portfolio Tracking
-- Smart Planning & Goal Modeling
-- Conversational Financial AI ("Ask Anything")
-
-### 3. Trust & Principles Grid (`Principles.tsx`)
-Articulates Fermor's philosophy: Full transparency, no login walls, mobile-first design, clear affiliate labeling, and open methodology.
-
-### 4. Interactive FAQ Accordion (`FAQ.tsx`)
-Accessible accordion answering crucial user questions regarding data privacy, calculation accuracy, and Union Budget tax updates.
-
-### 5. Early Access Waitlist & Conversion Funnel (`Hero.tsx` & `CTA.tsx`)
-Interactive email capture forms with real-time validation and visual confirmation feedback.
+### 2. Product Bento Grid (`Features.tsx`)
+- **Macro Portfolio Allocation**: Multi-segment progress bar representing Equities, Liquid Debt, Sovereign Gold, and US Tech.
+- **Step-Up SIP Planner**: Interactive toggle illustrating how a 10% annual salary step-up more than doubles the final corpus.
+- **Union Budget Tax Optimizer**: New vs. Old Regime comparison factoring standard deduction (₹75,000) and Section 87A rebate.
+- **Conversational Financial Copilot ("Ask Fermor")**: Clean conversational terminal preview.
 
 ---
 
@@ -103,24 +102,27 @@ fermor-homepage/
 │   │   ├── globals.css     # Design tokens, keyframe animations, glassmorphism utilities
 │   │   ├── layout.tsx      # Root metadata, OpenGraph tags, Google font optimization
 │   │   └── page.tsx        # Homepage page composition
-│   └── components/
-│       ├── Navbar.tsx         # Responsive glassmorphic floating navigation
-│       ├── Hero.tsx           # Headline, early access waitlist, interactive stats
-│       ├── Features.tsx       # Core feature suite with hover micro-interactions
-│       ├── CalculatorDemo.tsx # Multi-tab client-side financial calculator engine
-│       ├── Principles.tsx     # Value propositions and transparency commitments
-│       ├── Testimonials.tsx   # Verified Indian retail user reviews
-│       ├── BlogPreview.tsx    # Recent regulatory & personal finance articles
-│       ├── FAQ.tsx            # Accessible accordion for common questions
-│       ├── CTA.tsx            # Bottom conversion section with gradient glow
-│       └── Footer.tsx         # Comprehensive sitemap and regulatory disclaimers
+│   ├── components/
+│   │   ├── ui/             # shadcn/ui components (Radix primitives)
+│   │   │   ├── accordion.tsx
+│   │   │   ├── badge.tsx
+│   │   │   ├── button.tsx
+│   │   │   ├── card.tsx
+│   │   │   ├── input.tsx
+│   │   │   ├── slider.tsx
+│   │   │   └── tabs.tsx
+│   │   ├── Navbar.tsx         # Responsive glassmorphic floating navigation with Framer Motion
+│   │   ├── Hero.tsx           # Headline, live interactive SIP simulator, and trust badges
+│   │   ├── Features.tsx       # Bento Grid feature suite with interactive Step-Up toggle
+│   │   ├── CalculatorDemo.tsx # Flagship multi-tab client-side financial calculator engine
+│   │   ├── Principles.tsx     # Value propositions and industry contrast matrix
+│   │   ├── Testimonials.tsx   # Verified Indian retail user reviews with star ratings
+│   │   ├── BlogPreview.tsx    # Recent regulatory & personal finance research notes
+│   │   ├── FAQ.tsx            # Accessible Radix Accordion for common questions
+│   │   ├── CTA.tsx            # Bottom conversion section with specular glow
+│   │   └── Footer.tsx         # Comprehensive sitemap and regulatory disclaimers
+│   └── lib/
+│       └── utils.ts           # Standard cn class merge utility
 ├── tsconfig.json
 └── package.json
 ```
-
----
-
-## 📝 Submission Highlights
-
-- **No AI boilerplate look**: Custom layout, deliberate Indian fintech domain copy, working math logic, and custom SVG visualizations.
-- **Production-ready code**: Clean TypeScript types, zero console errors, accessible ARIA attributes, and responsive breakpoints.
