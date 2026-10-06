@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -53,11 +52,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-IN" suppressHydrationWarning className={`${inter.variable} ${poppins.variable}`}>
-      <body className="min-h-screen bg-[#f8f9fa] dark:bg-[#0d0f11] text-[#101214] dark:text-[#f3f4f6] antialiased">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
-          {children}
-        </ThemeProvider>
+    <html lang="en-IN" className={`${inter.variable} ${poppins.variable}`}>
+      <body className="min-h-screen bg-[#f8f9fa] text-[#101214] antialiased selection:bg-emerald-200 selection:text-[#101214]">
+        {children}
       </body>
     </html>
   );

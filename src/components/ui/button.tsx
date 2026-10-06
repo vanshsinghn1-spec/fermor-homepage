@@ -11,17 +11,17 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-emerald-400 text-zinc-950 font-semibold hover:bg-emerald-300 shadow-[0_0_20px_rgba(52,211,153,0.3)] hover:shadow-[0_0_28px_rgba(52,211,153,0.45)] active:scale-[0.98]",
+          "bg-[#101214] text-white font-semibold hover:bg-[#27272a] shadow-sm active:scale-[0.98]",
         glow:
-          "relative overflow-hidden bg-gradient-to-r from-emerald-400 to-teal-300 text-zinc-950 font-bold shadow-[0_0_24px_rgba(52,211,153,0.35)] hover:shadow-[0_0_36px_rgba(52,211,153,0.55)] active:scale-[0.98]",
+          "relative overflow-hidden bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md hover:shadow-lg hover:from-emerald-700 hover:to-teal-700 active:scale-[0.98]",
         secondary:
-          "bg-zinc-800/80 text-zinc-100 hover:bg-zinc-700/80 border border-zinc-700/60 shadow-sm active:scale-[0.98]",
+          "bg-slate-100 text-[#101214] hover:bg-slate-200 border border-slate-200 shadow-sm active:scale-[0.98]",
         outline:
-          "border border-zinc-800 bg-zinc-900/40 hover:bg-zinc-800/60 hover:border-zinc-700 text-zinc-200 active:scale-[0.98]",
+          "border border-slate-300 bg-white hover:bg-slate-50 hover:border-slate-400 text-slate-800 active:scale-[0.98]",
         ghost:
-          "hover:bg-zinc-800/60 hover:text-zinc-100 text-zinc-400",
+          "hover:bg-slate-100 hover:text-[#101214] text-slate-600",
         link:
-          "text-emerald-400 underline-offset-4 hover:underline",
+          "text-emerald-600 underline-offset-4 hover:underline",
       },
       size: {
         default: "h-10 px-4 py-2",

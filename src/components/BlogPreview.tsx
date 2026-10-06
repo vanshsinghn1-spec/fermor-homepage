@@ -46,12 +46,12 @@ export default function BlogPreview() {
             <Badge variant="blue" className="mb-4">
               Financial Knowledge Base
             </Badge>
-            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-[family-name:var(--font-poppins)] text-slate-900 dark:text-zinc-100">
+            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-[family-name:var(--font-poppins)] text-[#101214]">
               Clarity from the blog.
             </h2>
           </div>
           <Button variant="outline" size="sm" asChild>
-            <a href="#blog" className="flex items-center gap-1.5 self-start md:self-auto">
+            <a href="#blog" className="flex items-center gap-1.5 self-start md:self-auto font-medium">
               <span>View All Research Notes</span>
               <ArrowUpRight className="w-4 h-4" />
             </a>
@@ -68,34 +68,34 @@ export default function BlogPreview() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.1 }}
             >
-              <Card className="h-full flex flex-col justify-between p-6 md:p-7 bg-white/80 dark:bg-zinc-950/70 border-slate-200/90 dark:border-zinc-800/80 hover:border-slate-300 dark:hover:border-zinc-700/80 transition-all duration-300 shadow-md dark:shadow-none group cursor-pointer">
+              <Card className="h-full flex flex-col justify-between p-6 md:p-7 bg-white border-slate-200 hover:border-slate-300 hover:shadow-md transition-all duration-300 group cursor-pointer">
                 <div>
                   {/* Top metadata */}
                   <div className="flex items-center justify-between mb-4">
                     <Badge variant={item.badgeVariant} className="text-[10px]">
                       {item.category}
                     </Badge>
-                    <span className="flex items-center gap-1 text-[11px] text-slate-400 dark:text-zinc-500 font-mono">
+                    <span className="flex items-center gap-1 text-[11px] text-slate-400 font-mono">
                       <Clock className="w-3 h-3" />
                       {item.readTime}
                     </span>
                   </div>
 
                   {/* Title */}
-                  <CardTitle className="text-base font-bold text-slate-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors leading-snug mb-3">
+                  <CardTitle className="text-base font-bold text-[#101214] group-hover:text-emerald-700 transition-colors leading-snug mb-3">
                     {item.title}
                   </CardTitle>
 
                   {/* Excerpt */}
-                  <CardDescription className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed mb-6">
+                  <CardDescription className="text-xs text-[#5B6065] leading-relaxed mb-6">
                     {item.excerpt}
                   </CardDescription>
                 </div>
 
                 {/* Footer link */}
-                <div className="pt-4 border-t border-slate-100 dark:border-zinc-900 flex items-center justify-between text-xs text-slate-400 dark:text-zinc-500 font-medium">
+                <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
                   <span>{item.date}</span>
-                  <span className="text-emerald-600 dark:text-emerald-400 group-hover:translate-x-1 transition-transform flex items-center gap-1 font-semibold">
+                  <span className="text-emerald-700 group-hover:translate-x-1 transition-transform flex items-center gap-1 font-semibold">
                     Read Note <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </div>

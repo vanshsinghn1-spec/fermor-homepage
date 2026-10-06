@@ -12,21 +12,11 @@
     --primary-foreground: #ffffff;
     --radius: 0.75rem;
   }
-
-  .dark {
-    --background: #0d0f11;
-    --foreground: #f3f4f6;
-    --card: #131619;
-    --card-foreground: #f3f4f6;
-    --border: rgba(255, 255, 255, 0.08);
-    --input: rgba(255, 255, 255, 0.1);
-    --primary: #75fb90;
-    --primary-foreground: #0d0f11;
-  }
 }
 
 html {
   scroll-behavior: smooth;
+  color-scheme: light;
 }
 
 body {
@@ -34,12 +24,6 @@ body {
   color: #101214;
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
-  transition: background-color 0.25s ease, color 0.25s ease;
-}
-
-.dark body, body.dark {
-  background-color: #0d0f11;
-  color: #f3f4f6;
 }
 
 /* Scrollbars */
@@ -53,89 +37,35 @@ body {
   background: #cbd5e1;
   border-radius: 9999px;
 }
-.dark ::-webkit-scrollbar-thumb {
-  background: #27272a;
-}
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
 
-/* Dynamic Grid Pattern */
+/* Grid Pattern */
 .bg-grid-pattern {
-  background-size: 40px 40px;
+  background-size: 36px 36px;
   background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-}
-.dark .bg-grid-pattern {
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(16, 24, 40, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(16, 24, 40, 0.04) 1px, transparent 1px);
 }
 
 /* Glassmorphism */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(20px) saturate(160%);
   -webkit-backdrop-filter: blur(20px) saturate(160%);
   border: 1px solid rgba(226, 232, 240, 0.9);
 }
-.dark .glass-panel {
-  background: rgba(19, 22, 25, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
 
 .glass-pill {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(226, 232, 240, 0.85);
-  box-shadow: 0 4px 16px -2px rgba(16, 18, 20, 0.05);
-}
-.dark .glass-pill {
-  background: rgba(20, 23, 26, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(226, 232, 240, 0.88);
+  box-shadow: 0 4px 16px -2px rgba(16, 18, 20, 0.06);
 }
 
-/* Gradient text */
-.text-gradient-emerald {
-  background: linear-gradient(135deg, #059669 0%, #0d9488 50%, #0284c7 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.dark .text-gradient-emerald {
-  background: linear-gradient(135deg, #75fb90 0%, #34d399 50%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Specular borders */
-.specular-border {
-  position: relative;
-}
-.dark .specular-border::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(117, 251, 144, 0.4), transparent);
-  pointer-events: none;
-}
-.specular-border::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.3), transparent);
-  pointer-events: none;
-}
-
-/* Custom Range Slider */
+/* Range Slider */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
@@ -148,9 +78,6 @@ input[type="range"]::-webkit-slider-runnable-track {
   height: 6px;
   border-radius: 9999px;
 }
-.dark input[type="range"]::-webkit-slider-runnable-track {
-  background: #27272a;
-}
 
 input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -161,13 +88,8 @@ input[type="range"]::-webkit-slider-thumb {
   background: #10b981;
   border: 2px solid #ffffff;
   margin-top: -7px;
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.35);
+  box-shadow: 0 1px 4px rgba(16, 185, 129, 0.4);
   transition: transform 0.15s ease;
-}
-.dark input[type="range"]::-webkit-slider-thumb {
-  background: #75fb90;
-  border: 2px solid #0d0f11;
-  box-shadow: 0 0 12px rgba(117, 251, 144, 0.45);
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {

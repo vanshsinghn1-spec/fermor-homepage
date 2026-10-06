@@ -6,7 +6,7 @@ interface FermorLogoProps extends React.SVGProps<SVGSVGElement> {
 }
 
 export default function FermorLogo({
-  className = "w-7 h-5 text-emerald-400 dark:text-[#75FB90]",
+  className = "w-7 h-5 text-emerald-600",
   size,
   ...props
 }: FermorLogoProps) {

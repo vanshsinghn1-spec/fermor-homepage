@@ -60,11 +60,11 @@ export default function FAQ() {
           <Badge variant="blue" className="mb-4">
             Common Inquiries
           </Badge>
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-[family-name:var(--font-poppins)] text-slate-900 dark:text-zinc-100 mb-4">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-[family-name:var(--font-poppins)] text-[#101214] mb-4">
             Frequently Asked{" "}
-            <span className="text-slate-400 dark:text-zinc-500">Questions.</span>
+            <span className="text-slate-400">Questions.</span>
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 leading-relaxed">
+          <p className="text-sm sm:text-base text-[#5B6065] leading-relaxed">
             Everything you need to know about our privacy architecture, calculation accuracy, and regulatory compliance.
           </p>
         </div>
@@ -72,11 +72,11 @@ export default function FAQ() {
         {/* Shadcn Radix Accordion */}
         <Accordion type="single" collapsible defaultValue="item-1" className="w-full">
           {faqs.map((faq) => (
-            <AccordionItem key={faq.value} value={faq.value} className="bg-white/80 dark:bg-zinc-950/60 border-slate-200/90 dark:border-zinc-800/80 shadow-sm dark:shadow-none">
-              <AccordionTrigger className="text-sm sm:text-base font-semibold text-slate-900 dark:text-zinc-100 hover:text-emerald-600 dark:hover:text-emerald-400">
+            <AccordionItem key={faq.value} value={faq.value} className="bg-white border-slate-200 shadow-sm">
+              <AccordionTrigger className="text-sm sm:text-base font-semibold text-[#101214] hover:text-emerald-700">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed">
+              <AccordionContent className="text-xs sm:text-sm text-[#5B6065] leading-relaxed">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>
@@ -84,22 +84,24 @@ export default function FAQ() {
         </Accordion>
 
         {/* Support contact card */}
-        <div className="mt-12 p-6 rounded-2xl border border-slate-200/90 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-950/60 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-md dark:shadow-none">
+        <div className="mt-12 p-6 rounded-2xl border border-slate-200 bg-white flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-sm">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-700">
               <FermorLogo className="w-5 h-3.5" />
             </div>
             <div>
-              <div className="text-sm font-semibold text-slate-900 dark:text-zinc-200">
+              <div className="text-sm font-semibold text-[#101214]">
                 Have a question or custom calculation formula?
               </div>
-              <div className="text-xs text-slate-500 dark:text-zinc-500">
+              <div className="text-xs text-slate-500">
                 Our engineering team responds to all methodology inquiries.
               </div>
             </div>
           </div>
           <Button variant="outline" size="sm" asChild>
-            <a href="mailto:fermor.in.contact@gmail.com">Contact Us</a>
+            <a href="mailto:fermor.in.contact@gmail.com" className="font-semibold text-slate-800">
+              Contact Us
+            </a>
           </Button>
         </div>
       </div>
