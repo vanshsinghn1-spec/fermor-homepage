@@ -36,6 +36,9 @@ Most financial aggregator apps in India (loan portals, insurance brokers, mutual
 
 | Component / Layer | Implementation Details |
 | :--- | :--- |
+| **Official Fermor Brand Mark** (`FermorLogo.tsx`) | Vector SVG rendition matching `fermor.in`'s official double-stepped chevron glyph, integrated across Navbar, Hero, and Footer. |
+| **Light & Dark Mode Engine** (`ThemeToggle.tsx`) | Seamless client-side theme switcher via `next-themes` with animated spring-physics sun/moon icons and balanced palettes. |
+| **Living Background Animation** (`BackgroundAnimation.tsx`) | Continuous multi-colored floating blurred gradient orbs (indigo, sky, purple, emerald, amber) with organic easing and diagonal light sweeps. |
 | **Pill Navigation** (`Navbar.tsx`) | Floating glass pill with scroll-state blur detection, `layoutId="navbar-hover"` animated indicator, live status pill, and mobile drawer. |
 | **Hero & Instant Simulator** (`Hero.tsx`) | High-contrast typography with ambient radial lighting, early access funnel, and a live in-hero compounding simulator. |
 | **Interactive Bento Grid** (`Features.tsx`) | Modern 4-card Bento layout showcasing Portfolio Risk Radar, Step-Up SIP Multiplier, New vs. Old Tax Engine, and Conversational Financial Copilot. |
