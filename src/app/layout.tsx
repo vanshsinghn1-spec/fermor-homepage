@@ -54,8 +54,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en-IN" suppressHydrationWarning className={`${inter.variable} ${poppins.variable}`}>
-      <body className="min-h-screen bg-[#f8fafc] dark:bg-[#09090b] text-slate-900 dark:text-zinc-100 antialiased selection:bg-emerald-400 selection:text-black">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+      <body className="min-h-screen bg-[#f8f9fa] dark:bg-[#0d0f11] text-[#101214] dark:text-[#f3f4f6] antialiased">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}
         </ThemeProvider>
       </body>

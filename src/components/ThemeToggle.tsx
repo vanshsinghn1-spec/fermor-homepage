@@ -14,9 +14,7 @@ export function ThemeToggle() {
   }, []);
 
   if (!mounted) {
-    return (
-      <div className="w-9 h-9 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900" />
-    );
+    return <div className="w-8 h-8 rounded-full" />;
   }
 
   const isDark = resolvedTheme === "dark";
@@ -24,27 +22,28 @@ export function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="relative w-9 h-9 rounded-xl flex items-center justify-center border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors shadow-sm focus:outline-none cursor-pointer"
+      className="relative p-2 rounded-full text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-zinc-100 hover:bg-slate-100/80 dark:hover:bg-zinc-800/60 transition-colors focus:outline-none cursor-pointer"
       aria-label="Toggle light/dark theme"
+      title={`Switch to ${isDark ? "light" : "dark"} mode`}
     >
       <AnimatePresence mode="wait" initial={false}>
         {isDark ? (
           <motion.div
             key="moon"
-            initial={{ scale: 0.5, rotate: -90, opacity: 0 }}
+            initial={{ scale: 0.6, rotate: -90, opacity: 0 }}
             animate={{ scale: 1, rotate: 0, opacity: 1 }}
-            exit={{ scale: 0.5, rotate: 90, opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            exit={{ scale: 0.6, rotate: 90, opacity: 0 }}
+            transition={{ duration: 0.18 }}
           >
             <Moon className="w-4 h-4 text-emerald-400" />
           </motion.div>
         ) : (
           <motion.div
             key="sun"
-            initial={{ scale: 0.5, rotate: 90, opacity: 0 }}
+            initial={{ scale: 0.6, rotate: 90, opacity: 0 }}
             animate={{ scale: 1, rotate: 0, opacity: 1 }}
-            exit={{ scale: 0.5, rotate: -90, opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            exit={{ scale: 0.6, rotate: -90, opacity: 0 }}
+            transition={{ duration: 0.18 }}
           >
             <Sun className="w-4 h-4 text-amber-500" />
           </motion.div>
