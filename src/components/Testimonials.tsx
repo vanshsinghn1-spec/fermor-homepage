@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star, ShieldCheck, CheckCircle2 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Star, CheckCircle2 } from "lucide-react";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 const testimonials = [
@@ -35,22 +35,17 @@ const testimonials = [
 export default function Testimonials() {
   return (
     <section className="relative py-28 md:py-36 px-4 md:px-8">
-      {/* Background ambient lighting */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
-        <div className="absolute top-1/2 left-1/3 w-[550px] h-[350px] bg-teal-500/[0.03] blur-[150px] rounded-full" />
-      </div>
-
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
           <Badge variant="mint" className="mb-4">
             User Trust & Validation
           </Badge>
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-[family-name:var(--font-poppins)] text-zinc-100 mb-4">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-[family-name:var(--font-poppins)] text-slate-900 dark:text-zinc-100 mb-4">
             Trusted by creators{" "}
-            <span className="text-zinc-500">across India.</span>
+            <span className="text-slate-400 dark:text-zinc-500">across India.</span>
           </h2>
-          <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 leading-relaxed">
             From tech professionals in Bengaluru to tax practitioners in Mumbai, here is why Indians switch to Fermor.
           </p>
         </div>
@@ -65,32 +60,32 @@ export default function Testimonials() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.1 }}
             >
-              <Card className="h-full flex flex-col justify-between p-6 md:p-7 bg-zinc-950/70 border-zinc-800/80 hover:border-zinc-700/80 transition-all duration-300 specular-border">
+              <Card className="h-full flex flex-col justify-between p-6 md:p-7 bg-white/80 dark:bg-zinc-950/70 border-slate-200/90 dark:border-zinc-800/80 hover:border-slate-300 dark:hover:border-zinc-700/80 transition-all duration-300 shadow-md dark:shadow-none specular-border">
                 <div>
                   {/* Rating Stars */}
-                  <div className="flex items-center gap-1 mb-4 text-emerald-400">
+                  <div className="flex items-center gap-1 mb-4 text-amber-500 dark:text-emerald-400">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-emerald-400" />
+                      <Star key={i} className="w-4 h-4 fill-current" />
                     ))}
                   </div>
 
                   {/* Quote */}
-                  <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-6">
+                  <p className="text-xs sm:text-sm text-slate-700 dark:text-zinc-300 leading-relaxed mb-6">
                     &ldquo;{t.quote}&rdquo;
                   </p>
                 </div>
 
                 {/* Author Info */}
-                <div className="pt-4 border-t border-zinc-900 flex items-center justify-between">
+                <div className="pt-4 border-t border-slate-100 dark:border-zinc-900 flex items-center justify-between">
                   <div>
-                    <div className="text-sm font-semibold text-zinc-100 flex items-center gap-1.5">
-                      <span>{t.author}</span>
+                    <div className="text-sm font-semibold text-slate-900 dark:text-zinc-100">
+                      {t.author}
                     </div>
-                    <div className="text-xs text-zinc-500">
+                    <div className="text-xs text-slate-500 dark:text-zinc-500">
                       {t.role} · {t.location}
                     </div>
                   </div>
-                  <div className="w-7 h-7 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400" title={t.verified}>
+                  <div className="w-7 h-7 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400" title={t.verified}>
                     <CheckCircle2 className="w-4 h-4" />
                   </div>
                 </div>

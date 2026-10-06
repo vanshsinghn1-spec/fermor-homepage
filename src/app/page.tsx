@@ -8,12 +8,14 @@ import BlogPreview from "@/components/BlogPreview";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import BackgroundAnimation from "@/components/BackgroundAnimation";
 
 export default function Home() {
   return (
-    <>
+    <div className="relative min-h-screen overflow-hidden">
+      <BackgroundAnimation />
       <Navbar />
-      <main>
+      <main className="relative z-10">
         <Hero />
         <Features />
         <CalculatorDemo />
@@ -24,6 +26,6 @@ export default function Home() {
         <CTA />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

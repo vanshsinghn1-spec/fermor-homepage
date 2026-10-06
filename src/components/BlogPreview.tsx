@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Clock, BookOpen, ArrowUpRight } from "lucide-react";
+import { ArrowRight, Clock, ArrowUpRight } from "lucide-react";
 import { Card, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 const articles = [
   {
     category: "TAXATION",
-    badgeVariant: "mint" as const,
+    badgeVariant: "purple" as const,
     title: "ITR Filing FY 2025-26: Complete Calendar, Penalties, & Section 87A Nuances",
     excerpt:
       "A step-by-step breakdown of income tax filing dates for salaried individuals, HUFs, and professionals — with clear explanations of Section 234A/B/C interest fees.",
@@ -27,7 +27,7 @@ const articles = [
   },
   {
     category: "VALUATION",
-    badgeVariant: "purple" as const,
+    badgeVariant: "mint" as const,
     title: "Evaluating Indian Equity Multiples: Beyond Trailing P/E Ratios",
     excerpt:
       "Why standard P/E can deceive investors during high capex cycles. How to analyze EV/EBITDA and Return on Capital Employed (ROCE) in Indian mid-caps.",
@@ -43,10 +43,10 @@ export default function BlogPreview() {
         {/* Header with view all button */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div>
-            <Badge variant="mint" className="mb-4">
+            <Badge variant="blue" className="mb-4">
               Financial Knowledge Base
             </Badge>
-            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-[family-name:var(--font-poppins)] text-zinc-100">
+            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-[family-name:var(--font-poppins)] text-slate-900 dark:text-zinc-100">
               Clarity from the blog.
             </h2>
           </div>
@@ -68,34 +68,34 @@ export default function BlogPreview() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.1 }}
             >
-              <Card className="h-full flex flex-col justify-between p-6 md:p-7 bg-zinc-950/70 border-zinc-800/80 hover:border-zinc-700/80 transition-all duration-300 group cursor-pointer">
+              <Card className="h-full flex flex-col justify-between p-6 md:p-7 bg-white/80 dark:bg-zinc-950/70 border-slate-200/90 dark:border-zinc-800/80 hover:border-slate-300 dark:hover:border-zinc-700/80 transition-all duration-300 shadow-md dark:shadow-none group cursor-pointer">
                 <div>
                   {/* Top metadata */}
                   <div className="flex items-center justify-between mb-4">
                     <Badge variant={item.badgeVariant} className="text-[10px]">
                       {item.category}
                     </Badge>
-                    <span className="flex items-center gap-1 text-[11px] text-zinc-500 font-mono">
+                    <span className="flex items-center gap-1 text-[11px] text-slate-400 dark:text-zinc-500 font-mono">
                       <Clock className="w-3 h-3" />
                       {item.readTime}
                     </span>
                   </div>
 
                   {/* Title */}
-                  <CardTitle className="text-base font-bold text-zinc-100 group-hover:text-emerald-400 transition-colors leading-snug mb-3">
+                  <CardTitle className="text-base font-bold text-slate-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors leading-snug mb-3">
                     {item.title}
                   </CardTitle>
 
                   {/* Excerpt */}
-                  <CardDescription className="text-xs text-zinc-400 leading-relaxed mb-6">
+                  <CardDescription className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed mb-6">
                     {item.excerpt}
                   </CardDescription>
                 </div>
 
                 {/* Footer link */}
-                <div className="pt-4 border-t border-zinc-900 flex items-center justify-between text-xs text-zinc-500 font-medium">
+                <div className="pt-4 border-t border-slate-100 dark:border-zinc-900 flex items-center justify-between text-xs text-slate-400 dark:text-zinc-500 font-medium">
                   <span>{item.date}</span>
-                  <span className="text-emerald-400 group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                  <span className="text-emerald-600 dark:text-emerald-400 group-hover:translate-x-1 transition-transform flex items-center gap-1 font-semibold">
                     Read Note <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </div>

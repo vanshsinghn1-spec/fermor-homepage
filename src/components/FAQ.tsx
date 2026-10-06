@@ -9,7 +9,8 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { HelpCircle, Mail, ShieldCheck } from "lucide-react";
+import { Mail } from "lucide-react";
+import FermorLogo from "@/components/FermorLogo";
 
 const faqs = [
   {
@@ -53,22 +54,17 @@ const faqs = [
 export default function FAQ() {
   return (
     <section id="faq" className="relative py-28 md:py-36 px-4 md:px-8">
-      {/* Background ambient lighting */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
-        <div className="absolute top-1/2 right-1/3 w-[500px] h-[350px] bg-sky-500/[0.03] blur-[150px] rounded-full" />
-      </div>
-
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <Badge variant="mint" className="mb-4">
+          <Badge variant="blue" className="mb-4">
             Common Inquiries
           </Badge>
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-[family-name:var(--font-poppins)] text-zinc-100 mb-4">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-[family-name:var(--font-poppins)] text-slate-900 dark:text-zinc-100 mb-4">
             Frequently Asked{" "}
-            <span className="text-zinc-500">Questions.</span>
+            <span className="text-slate-400 dark:text-zinc-500">Questions.</span>
           </h2>
-          <p className="text-sm sm:text-base text-zinc-400 leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-zinc-400 leading-relaxed">
             Everything you need to know about our privacy architecture, calculation accuracy, and regulatory compliance.
           </p>
         </div>
@@ -76,11 +72,11 @@ export default function FAQ() {
         {/* Shadcn Radix Accordion */}
         <Accordion type="single" collapsible defaultValue="item-1" className="w-full">
           {faqs.map((faq) => (
-            <AccordionItem key={faq.value} value={faq.value}>
-              <AccordionTrigger className="text-sm sm:text-base font-semibold">
+            <AccordionItem key={faq.value} value={faq.value} className="bg-white/80 dark:bg-zinc-950/60 border-slate-200/90 dark:border-zinc-800/80 shadow-sm dark:shadow-none">
+              <AccordionTrigger className="text-sm sm:text-base font-semibold text-slate-900 dark:text-zinc-100 hover:text-emerald-600 dark:hover:text-emerald-400">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+              <AccordionContent className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>
@@ -88,16 +84,16 @@ export default function FAQ() {
         </Accordion>
 
         {/* Support contact card */}
-        <div className="mt-12 p-6 rounded-2xl border border-zinc-800/80 bg-zinc-950/60 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+        <div className="mt-12 p-6 rounded-2xl border border-slate-200/90 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-950/60 backdrop-blur-xl flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left shadow-md dark:shadow-none">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-emerald-400">
-              <Mail className="w-5 h-5" />
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+              <FermorLogo className="w-5 h-3.5" />
             </div>
             <div>
-              <div className="text-sm font-semibold text-zinc-200">
+              <div className="text-sm font-semibold text-slate-900 dark:text-zinc-200">
                 Have a question or custom calculation formula?
               </div>
-              <div className="text-xs text-zinc-500">
+              <div className="text-xs text-slate-500 dark:text-zinc-500">
                 Our engineering team responds to all methodology inquiries.
               </div>
             </div>
